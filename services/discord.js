@@ -1,6 +1,5 @@
 const db = require('../db')
 const giphy = require('./giphy')
-const constants = require('../constants')
 let client = null
 
 exports.init = discordClient => {
@@ -144,8 +143,8 @@ exports.getUsername = userID => {
   return null
 }
 
-exports.findMessage = async (channelName, messageID) => {
-  for (let channel of client.guilds.get(constants.DevStreakGuildID).channels.array()) {
+exports.findMessage = async (guildID, channelName, messageID) => {
+  for (let channel of client.guilds.get(guildID).channels.array()) {
     if(channel.name === channelName) {
       const message = await channel.fetchMessage(messageID).catch(error => {
         console.log(`Couldn't find message ID ${messageID}`)
