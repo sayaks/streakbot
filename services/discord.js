@@ -13,7 +13,7 @@ assignTopStreakRoles = () => {
 
   // assign/remove top streak role
   client.guilds.forEach(guild => {
-    if (guild) {
+    if (guild && guild.available) {
       guild.members.forEach(user => {
         const roleid = db.getRole(guild.id, 'top')
         if (!roleid) { return }
@@ -29,7 +29,7 @@ assignTopStreakRoles = () => {
 
 removeActiveStreakRoles = () => {
   client.guilds.forEach(guild => {
-    if (guild) {
+    if (guild && guild.available) {
       db.checkStreaks(client.users)
   
       for(let user of db.getUsers()) {
