@@ -245,15 +245,16 @@ exports.getActiveStreaksForChannel = (guildID, channelName) => {
   let result = []
   let users = exports.getUsers()
 
+  console.log(channelName)
+
+
   users.forEach(user => {
-    user.streaks.filter(streak => streak.guildID === guildID).forEach(streak => {
-      if(streak.channelName === channelName && streak.streakLevel > 0) {
-        result.push({
-          userID: user.userID,
-          channelName: channelName,
-          streakLevel: streak.streakLevel
-        })
-      }
+    user.streaks.filter(streak => streak.guildID === guildID && streak.channelName === channelName && streak.streakLevel > 0).forEach(streak => {
+      result.push({
+        userID: user.userID,
+        channelName: channelName,
+        streakLevel: streak.streakLevel
+      })
     })
   })
 
